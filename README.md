@@ -4,8 +4,6 @@
 
 ---
 
-## Repository Description
-
 A research-grade project that models aircraft flight dynamics and computes optimized 4D trajectories (latitude, longitude, altitude, time) that minimize fuel burn and contrail formation. Two optimization approaches — direct collocation (classical optimal control) and reinforcement learning (PPO/SAC) — are implemented, compared against each other, and validated against real ADS-B flight trajectories from the OpenSky Network. Real ERA5 wind field data is integrated so optimized trajectories react to actual atmospheric conditions rather than idealized still air.
 
 The project sits at the intersection of **aerospace engineering, optimal control, reinforcement learning, and data science**, and produces an interactive map comparing real flown routes to optimizer-suggested alternatives with estimated fuel and emissions savings.
