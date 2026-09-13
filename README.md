@@ -161,9 +161,3 @@ python visualization/map_dashboard.py --route LFPG-KJFK
 ## Author
 
 Project — Aircraft Trajectory Optimization, developed as part of an AI & Data Science engineering specialization.
-
----
-
-## 📄 License
-
-MIT License (or specify your preferred license).
