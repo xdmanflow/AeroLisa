@@ -1,4 +1,4 @@
-# Aircraft Trajectory Optimization Project
+# Aircraft-TO Trajectory Optimization Project
 
 **Optimizing flight trajectories for fuel efficiency and reduced climate impact, using classical optimal control and reinforcement learning — benchmarked against real-world flight data.**
 
