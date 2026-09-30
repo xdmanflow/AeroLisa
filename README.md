@@ -1,9 +1,6 @@
-# ✈️ AeroLisa
-
-**A Skywise-inspired aviation data platform, built end to end on public data.**
+# AeroLisa: A Skywise-inspired aviation data platform, built end to end on public data.**
 Predictive maintenance, fleet utilization, operational performance and market analytics, all on one shared ontology, with a decision dashboard and an AI copilot.
 
-![status](https://img.shields.io/badge/status-in%20development-orange) ![version](https://img.shields.io/badge/version-0.0.1-lightgrey) ![python](https://img.shields.io/badge/python-3.11+-3776AB) ![ci](https://github.com/xdmanflow/aerolisa/actions/workflows/ci.yml/badge.svg) ![license](https://img.shields.io/badge/license-MIT-green)
 
 > **Independent learning project, not affiliated with, endorsed by, or connected to Airbus, Palantir or Skywise.** Only public data is used. Company and product names are cited for context only.
 
