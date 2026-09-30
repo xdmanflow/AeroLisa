@@ -69,7 +69,7 @@ Each component has its own README with its goal, features, data and definition o
 **Machine learning:** scikit-learn, XGBoost, PyTorch, MLflow
 **Generative AI:** LangChain or LlamaIndex, Chroma / FAISS, an LLM API
 **Apps & APIs:** FastAPI, Streamlit, Plotly
-**Engineering:** Docker Compose, GitHub Actions, pytest, Ruff, pre-commit, Google Cloud (Cloud Run, Vertex AI)
+**Engineering:** Docker Compose, GitHub Actions, pytest, Ruff, pre-commit, Google Cloud (Cloud Run)
 
 ## Repository structure
 
