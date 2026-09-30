@@ -1,8 +1,6 @@
-# AeroLisa: A Skywise-inspired aviation data platform, built end to end
-Predictive maintenance, fleet utilization, operational performance and market analytics, all on one shared ontology, with a decision dashboard and an AI copilot.
+# AeroLisa: A Skywise-inspired Aviation AI & Data Platform
 
-
-> **Independent learning project, not affiliated with, endorsed by, or connected to Airbus, Palantir or Skywise.** Only public data is used. Company and product names are cited for context only.
+> AeroLisa is an independent, Skywise-inspired aviation AI and data platform that brings predictive maintenance, fleet utilization, operational performance, and market analytics together on a single shared ontology, paired with a decision dashboard and an AI copilot to turn aviation data into actionable insight. It is a personal learning project built entirely on public data, and it is not affiliated with, endorsed by, or connected to Airbus, Palantir, or Skywise; company and product names are mentioned for context only.
 
 ---
 
