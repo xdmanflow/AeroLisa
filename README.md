@@ -1,4 +1,4 @@
-# AeroLisa: A Skywise-inspired aviation data platform, built end to end on public data.**
+# AeroLisa: A Skywise-inspired aviation data platform, built end to end
 Predictive maintenance, fleet utilization, operational performance and market analytics, all on one shared ontology, with a decision dashboard and an AI copilot.
 
 
