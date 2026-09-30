@@ -48,18 +48,18 @@ Design principles, detailed in [docs/architecture.md](docs/architecture.md):
 
 | Component | Path | Plan | Target | Status |
 |---|---|---|---|---|
-| Core: ontology & shared library | `src/aerolisa/core` | — | v0.1 · Jan 2027 | 🔜 planned |
-| CLI | `src/aerolisa/cli` | Mini-project #0 | v0.1 · Nov 2026 | 🔜 planned |
-| ETL pipelines | `src/aerolisa/pipelines + dags/` | Project #1 | v0.1 · Jan 2027 | 🔜 planned |
-| Market analytics | `src/aerolisa/modules/market` | — | v0.1 · Jan 2027 | 🔜 planned |
-| Engine health (RUL + anomalies) | `src/aerolisa/modules/engine_health` | Project #2 | v0.2 · Mar 2027 | 🔜 planned |
-| Fleet utilization | `src/aerolisa/modules/fleet` | — | v0.3 · Apr 2027 | 🔜 planned |
-| Operations performance | `src/aerolisa/modules/operations` | — | v0.3 · Apr 2027 | 🔜 planned |
-| Fleet Maintenance Planner ⭐ | `src/aerolisa/planner` | Flagship | v0.3 · Apr 2027 | 🔜 planned |
-| Ontology API | `src/aerolisa/api` | — | v0.3 · Apr 2027 | 🔜 planned |
-| Dashboard | `dashboard/` | — | v0.1 → v1.0 | 🔜 planned |
-| Copilot (RAG + agent) | `src/aerolisa/copilot` | Project #3 | v1.0 · May 2027 | 🔜 planned |
-| Trajectory optimization | `src/aerolisa/modules/trajectory` | Stretch | Summer 2027 | 🔜 planned |
+| Core: ontology & shared library | `src/aerolisa/core` | — | v0.1 · Jan 2027 | planned |
+| CLI | `src/aerolisa/cli` | Mini-project #0 | v0.1 · Nov 2026 | planned |
+| ETL pipelines | `src/aerolisa/pipelines + dags/` | Project #1 | v0.1 · Jan 2027 | planned |
+| Market analytics | `src/aerolisa/modules/market` | — | v0.1 · Jan 2027 | planned |
+| Engine health (RUL + anomalies) | `src/aerolisa/modules/engine_health` | Project #2 | v0.2 · Mar 2027 | planned |
+| Fleet utilization | `src/aerolisa/modules/fleet` | — | v0.3 · Apr 2027 | planned |
+| Operations performance | `src/aerolisa/modules/operations` | — | v0.3 · Apr 2027 | planned |
+| Fleet Maintenance Planner ⭐ | `src/aerolisa/planner` | Flagship | v0.3 · Apr 2027 | planned |
+| Ontology API | `src/aerolisa/api` | — | v0.3 · Apr 2027 | planned |
+| Dashboard | `dashboard/` | — | v0.1 → v1.0 | planned |
+| Copilot (RAG + agent) | `src/aerolisa/copilot` | Project #3 | v1.0 · May 2027 | planned |
+| Trajectory optimization | `src/aerolisa/modules/trajectory` | Stretch | Summer 2027 | planned |
 
 Each component has its own README with its goal, features, data and definition of done.
 
