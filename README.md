@@ -55,7 +55,7 @@ Design principles, detailed in [docs/architecture.md](docs/architecture.md):
 | Engine health (RUL + anomalies) | `src/aerolisa/modules/engine_health` | Project #2 | v0.2 · Mar 2027 | planned |
 | Fleet utilization | `src/aerolisa/modules/fleet` | — | v0.3 · Apr 2027 | planned |
 | Operations performance | `src/aerolisa/modules/operations` | — | v0.3 · Apr 2027 | planned |
-| Fleet Maintenance Planner ⭐ | `src/aerolisa/planner` | Flagship | v0.3 · Apr 2027 | planned |
+| Fleet Maintenance Planner | `src/aerolisa/planner` | Flagship | v0.3 · Apr 2027 | planned |
 | Ontology API | `src/aerolisa/api` | — | v0.3 · Apr 2027 | planned |
 | Dashboard | `dashboard/` | — | v0.1 → v1.0 | planned |
 | Copilot (RAG + agent) | `src/aerolisa/copilot` | Project #3 | v1.0 · May 2027 | planned |
