@@ -1,163 +1,179 @@
-# AeroLisa, The Aircraft Trajectory Optimization Project
+# ✈️ AeroLisa
 
-**Optimizing flight trajectories for fuel efficiency and reduced climate impact, using classical optimal control and reinforcement learning — benchmarked against real-world flight data.**
+**A Skywise-inspired aviation data platform, built end to end on public data.**
+Predictive maintenance, fleet utilization, operational performance and market analytics, all on one shared ontology, with a decision dashboard and an AI copilot.
 
----
+![status](https://img.shields.io/badge/status-in%20development-orange) ![version](https://img.shields.io/badge/version-0.0.1-lightgrey) ![python](https://img.shields.io/badge/python-3.11+-3776AB) ![ci](https://github.com/xdmanflow/aerolisa/actions/workflows/ci.yml/badge.svg) ![license](https://img.shields.io/badge/license-MIT-green)
 
-A research-grade project that models aircraft flight dynamics and computes optimized 4D trajectories (latitude, longitude, altitude, time) that minimize fuel burn and contrail formation. Two optimization approaches — direct collocation (classical optimal control) and reinforcement learning (PPO/SAC) — are implemented, compared against each other, and validated against real ADS-B flight trajectories from the OpenSky Network. Real ERA5 wind field data is integrated so optimized trajectories react to actual atmospheric conditions rather than idealized still air. The project sits at the intersection of **aerospace engineering, optimal control, reinforcement learning, and data science**, and produces an interactive map comparing real flown routes to optimizer-suggested alternatives with estimated fuel and emissions savings.
-
----
-
-## Keywords
-
-`aircraft-trajectory-optimization` `optimal-control` `reinforcement-learning` `aerospace-engineering` `flight-dynamics` `fuel-efficiency` `contrail-avoidance` `climate-impact-aviation` `ADS-B` `OpenSky-Network` `ERA5-wind-data` `point-mass-model` `direct-collocation` `pseudospectral-optimal-control` `CasADi` `GEKKO` `PPO` `SAC` `stable-baselines3` `gym-environment` `4D-trajectory-planning` `air-traffic-management` `data-science` `machine-learning` `python`
+> **Independent learning project, not affiliated with, endorsed by, or connected to Airbus, Palantir or Skywise.** Only public data is used. Company and product names are cited for context only.
 
 ---
 
-## Project Overview
+## Why AeroLisa
 
-Commercial flight trajectories are rarely fuel-optimal — pilots and airlines follow standardized procedures and ATC-constrained routes that leave real fuel and emissions savings on the table. This project asks:
+Airline fleets produce enormous amounts of engine, flight and operational data. Platforms such as Skywise turn that data into decisions: which engine to inspect first, which aircraft is flown hardest, where delays come from, how production shapes tomorrow's fleet.
 
-> **Given an aircraft's performance envelope, real wind conditions, and a real flown route, how much better could the trajectory be — and can a learned (RL) policy match a mathematically optimal (control theory) solution?**
+AeroLisa rebuilds that idea at small scale, with real engineering practices: ingestion pipelines, a shared data model, machine-learning modules, an API, a dashboard, an LLM copilot, tests, CI/CD, containers and cloud deployment.
 
-The project is split into four stages:
+## ⭐ Flagship: the Fleet Maintenance Planner
 
-1. **Flight dynamics modeling** — a physics-based point-mass model of aircraft performance (thrust, drag, fuel flow vs. altitude/speed/weight).
-2. **Classical optimal control** — direct collocation to compute a provably near-optimal fuel-minimizing trajectory.
-3. **Reinforcement learning** — a custom Gym environment where an RL agent learns to fly a fuel-efficient trajectory step by step.
-4. **Validation & comparison** — benchmarking both methods against each other and against real historical flights.
+NASA C-MAPSS engines are assigned to real A320-family airframes tracked on the OpenSky Network. Each engine's degradation advances with its aircraft's **real flight cycles**. The planner combines predicted remaining useful life, anomaly scores and utilization into a **ranked, explained list of engines to inspect first**.
 
----
+> The fleet is **simulated** (C-MAPSS engines are synthetic) and labelled as such everywhere. The flight activity driving it is real.
 
-## Why This Project Is Different
+## Architecture
 
-Most student ML projects stop at "train a model, report accuracy." This project instead:
-
-- Grounds machine learning in **real physical constraints** (thrust limits, climb rates, fuel flow — not a toy environment).
-- Uses **real-world data** (actual ADS-B flight tracks + real reanalysis wind fields), not synthetic or Kaggle-clean data.
-- Compares a **rigorous mathematical baseline (optimal control)** against a **learned baseline (RL)** — a comparison rarely done at student level, since it requires competence in both fields.
-- Targets a genuinely active 2023–2025 research problem: **contrail avoidance**, since contrails are estimated to account for roughly two-thirds of aviation's climate impact — more than CO2 emissions from burned fuel.
-- Produces a **visual, demo-able result**: real flight vs. optimized flight, overlaid on an interactive map with quantified savings.
-
----
-
-## Tech Stack
-
-| Component | Tools |
-|---|---|
-| Flight dynamics model | Python, NumPy, custom point-mass BADA-like performance model |
-| Classical optimization | CasADi or GEKKO (direct collocation / pseudospectral methods) |
-| Reinforcement learning | Gymnasium (custom env), Stable-Baselines3 (PPO / SAC) |
-| Real flight data | [OpenSky Network](https://opensky-network.org/) API |
-| Wind/weather data | [ERA5 reanalysis](https://cds.climate.copernicus.eu/) (ECMWF) |
-| Visualization | Plotly / deck.gl / Kepler.gl, Matplotlib |
-| Analysis | Pandas, GeoPandas |
-
----
-
-## Project Structure
-
-```
-aircraft-trajectory-optimization/
-│
-├── data/
-│   ├── raw/                  # Downloaded ADS-B tracks, ERA5 wind grids
-│   └── processed/            # Cleaned, resampled trajectory + wind data
-│
-├── dynamics/
-│   ├── performance_model.py  # Point-mass aircraft dynamics (thrust, drag, fuel flow)
-│   └── constraints.py        # Speed/altitude/climb-rate envelope limits
-│
-├── optimal_control/
-│   ├── collocation.py        # Direct collocation formulation (CasADi/GEKKO)
-│   └── solve_baseline.py     # Runs the classical solver on a chosen route
-│
-├── rl/
-│   ├── trajectory_env.py     # Custom Gymnasium environment
-│   ├── train.py               # PPO/SAC training script
-│   └── evaluate.py           # Rollout + reward analysis
-│
-├── validation/
-│   ├── compare_trajectories.py  # Real vs. classical vs. RL comparison
-│   └── fuel_savings_report.py   # Computes estimated fuel/CO2 savings
-│
-├── visualization/
-│   └── map_dashboard.py       # Interactive map of trajectories
-│
-├── notebooks/                 # Exploratory analysis, plots for the report
-├── requirements.txt
-└── README.md
+```mermaid
+flowchart TB
+    subgraph SRC[Public data sources]
+        S1[NASA C-MAPSS]
+        S2[OpenSky ADS-B]
+        S3[Airbus orders and deliveries]
+        S4[Eurocontrol]
+    end
+    SRC --> P[pipelines + Airflow DAGs<br/>raw to clean to curated, quality checks]
+    P --> C[(core<br/>ontology on PostgreSQL)]
+    C --> M1[engine_health]
+    C --> M2[fleet]
+    C --> M3[operations]
+    C --> M4[market]
+    C -.-> M5[trajectory - stretch]
+    M1 --> PL[planner<br/>Fleet Maintenance Planner]
+    M2 --> PL
+    PL --> API[api - FastAPI]
+    M3 --> API
+    M4 --> API
+    API --> D[dashboard - Streamlit]
+    API --> CO[copilot<br/>RAG + agent]
 ```
 
----
+Design principles, detailed in [docs/architecture.md](docs/architecture.md):
 
-## Getting Started
+1. **Ontology first.** Every module reads and writes real-world objects (Aircraft, Engine, Flight…) defined once in `aerolisa.core`.
+2. **Modules are independent.** They import only `aerolisa.core`, never each other. Only the planner, API, dashboard and copilot combine them.
+3. **Everything runs offline** on `sample_data/`; real data is downloaded at runtime and never committed.
 
-### 1. Clone and set up environment
+## What's inside
+
+| Component | Path | Plan | Target | Status |
+|---|---|---|---|---|
+| Core: ontology & shared library | `src/aerolisa/core` | — | v0.1 · Jan 2027 | 🔜 planned |
+| CLI | `src/aerolisa/cli` | Mini-project #0 | v0.1 · Nov 2026 | 🔜 planned |
+| ETL pipelines | `src/aerolisa/pipelines + dags/` | Project #1 | v0.1 · Jan 2027 | 🔜 planned |
+| Market analytics | `src/aerolisa/modules/market` | — | v0.1 · Jan 2027 | 🔜 planned |
+| Engine health (RUL + anomalies) | `src/aerolisa/modules/engine_health` | Project #2 | v0.2 · Mar 2027 | 🔜 planned |
+| Fleet utilization | `src/aerolisa/modules/fleet` | — | v0.3 · Apr 2027 | 🔜 planned |
+| Operations performance | `src/aerolisa/modules/operations` | — | v0.3 · Apr 2027 | 🔜 planned |
+| Fleet Maintenance Planner ⭐ | `src/aerolisa/planner` | Flagship | v0.3 · Apr 2027 | 🔜 planned |
+| Ontology API | `src/aerolisa/api` | — | v0.3 · Apr 2027 | 🔜 planned |
+| Dashboard | `dashboard/` | — | v0.1 → v1.0 | 🔜 planned |
+| Copilot (RAG + agent) | `src/aerolisa/copilot` | Project #3 | v1.0 · May 2027 | 🔜 planned |
+| Trajectory optimization | `src/aerolisa/modules/trajectory` | Stretch | Summer 2027 | 🔜 planned |
+
+Each component has its own README with its goal, features, data and definition of done.
+
+## Tech stack
+
+**Data engineering:** Python, pandas, PostgreSQL, Apache Airflow, PySpark, BigQuery
+**Machine learning:** scikit-learn, XGBoost, PyTorch, MLflow
+**Generative AI:** LangChain or LlamaIndex, Chroma / FAISS, an LLM API
+**Apps & APIs:** FastAPI, Streamlit, Plotly
+**Engineering:** Docker Compose, GitHub Actions, pytest, Ruff, pre-commit, Google Cloud (Cloud Run, Vertex AI)
+
+## Repository structure
+
+```text
+aerolisa/
+├── .github/
+│   ├── workflows/ci.yml          # lint + tests on every push
+│   ├── ISSUE_TEMPLATE/           # feature, bug, module task
+│   └── pull_request_template.md
+├── dags/                         # Airflow DAGs, one per data source
+├── dashboard/                    # Streamlit multipage app
+├── docs/
+│   ├── architecture.md
+│   ├── ontology.md
+│   ├── data-sources.md
+│   └── adr/                      # architecture decision records
+├── infra/                        # Dockerfiles, cloud config
+├── notebooks/                    # exploration only, never imported
+├── reports/                      # evaluation and data-quality reports
+├── sample_data/                  # tiny samples so everything runs offline
+├── src/aerolisa/
+│   ├── core/                     # ontology, database, config
+│   ├── cli/                      # command-line tool
+│   ├── pipelines/                # extract, transform, load, quality
+│   ├── modules/
+│   │   ├── market/
+│   │   ├── engine_health/
+│   │   ├── fleet/
+│   │   ├── operations/
+│   │   └── trajectory/
+│   ├── planner/                  # Fleet Maintenance Planner
+│   ├── api/                      # FastAPI ontology access layer
+│   └── copilot/                  # RAG + agent
+├── tests/
+├── docker-compose.yml
+├── Makefile
+├── pyproject.toml
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── ROADMAP.md
+├── SECURITY.md
+└── LICENSE
+```
+
+## Quick start
+
+> 🚧 Early development. Commands will grow with each release; see [CHANGELOG.md](CHANGELOG.md).
+
 ```bash
-git clone https://github.com/<your-username>/aircraft-trajectory-optimization.git
-cd aircraft-trajectory-optimization
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+git clone https://github.com/xdmanflow/aerolisa.git
+cd aerolisa
+python -m venv .venv && source .venv/bin/activate
+make install          # installs AeroLisa with dev tools
+make test             # runs the test suite
+cp .env.example .env  # local settings; never commit .env
+make up               # starts PostgreSQL (more services added per release)
 ```
 
-### 2. Get data access
-- Create a free account on [OpenSky Network](https://opensky-network.org/) for ADS-B trajectory data.
-- Register with [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/) for ERA5 wind data.
-- Add credentials to a `.env` file (see `.env.example`).
+## Data sources
 
-### 3. Pick a route and pull real flight data
-```bash
-python data/fetch_opensky.py --route "LFPG-KJFK" --date 2025-03-01
-```
+| Source | Used for | Terms |
+|---|---|---|
+| NASA C-MAPSS turbofan degradation simulation | Engine health, planner | Public NASA dataset; downloaded at runtime |
+| OpenSky Network ADS-B | Fleet utilization, planner, trajectory | OpenSky terms of use (non-commercial research); raw data not redistributed |
+| Airbus orders & deliveries | Market analytics | Public figures from airbus.com; not redistributed |
+| Eurocontrol performance data | Operations | ansperformance.eu terms |
+| Public maintenance documents | Copilot corpus | Each source listed with its licence |
 
-### 4. Run the classical optimal control baseline
-```bash
-python optimal_control/solve_baseline.py --route LFPG-KJFK --objective fuel
-```
+Details in [docs/data-sources.md](docs/data-sources.md).
 
-### 5. Train the RL agent
-```bash
-python rl/train.py --route LFPG-KJFK --timesteps 500000
-```
+## Roadmap
 
-### 6. Compare and visualize
-```bash
-python validation/compare_trajectories.py --route LFPG-KJFK
-python visualization/map_dashboard.py --route LFPG-KJFK
-```
+| Release | Target | Scope |
+|---|---|---|
+| v0.1 | Jan. 17, 2027 | Core ontology, ETL pipelines, market analytics, first dashboard |
+| v0.2 | Mar. 7, 2027 | Engine health: RUL prediction + anomaly detection |
+| v0.3 | Apr. 18, 2027 | Fleet + operations, planner v0, FastAPI, deployed on Google Cloud |
+| v1.0 | May 16, 2027 | Copilot, demo video |
+| Stretch | Summer 2027 | Trajectory optimization |
 
----
+Full roadmap: [ROADMAP.md](ROADMAP.md).
 
-## Example Output (target deliverable)
+## Results
 
-- An interactive map showing: **actual flown trajectory** (blue), **optimal-control trajectory** (green), **RL-agent trajectory** (orange), overlaid on real wind vectors.
-- A summary table: estimated fuel burn (kg), estimated CO2 (kg), estimated contrail-risk exposure (time spent in ice-supersaturated regions), for all three trajectories.
-- A short report analyzing where RL matches/diverges from the optimal control baseline, and why.
+_Metrics, screenshots and the demo video will be added at each release. No result is claimed before it is measured._
 
----
+## Learning companion
 
-## Roadmap / Stretch Goals
-
-- [ ] Add multi-flight batch evaluation (not just one route)
-- [ ] Incorporate contrail formation model (ISSR — ice-supersaturated region avoidance)
-- [ ] Add ATC/airspace constraint zones to the optimization
-- [ ] Wrap as a lightweight web demo (route picker → optimized trajectory)
-- [ ] Extend to multi-aircraft conflict-free trajectory optimization
-
----
-
-## Background & References
-
-- Eurocontrol BADA (Base of Aircraft Data) — standard aircraft performance modeling
-- OpenSky Network — [Schäfer et al., "Bringing Up OpenSky"](https://opensky-network.org/publications)
-- Contrail climate impact research (e.g. Google Research / American Airlines contrail avoidance trials, 2023–2024)
-- CasADi: [Andersson et al., "CasADi: a software framework for nonlinear optimization and optimal control"](https://web.casadi.org/publications/)
-- Stable-Baselines3 documentation
-
----
+AeroLisa is the applied side of **[Renaissance Project](https://github.com/xdmanflow/renaissance-project)**, my public one-year learning plan in mathematics, computer science, data and AI. What I learn each weekend there is applied here.
 
 ## Author
 
-Project — Aircraft Trajectory Optimization, developed as part of an AI & Data Science engineering specialization.
+**Manil DOUDOU**, engineering student in computer science (AI & data science), CESI.
+[LinkedIn](https://www.linkedin.com/in/manil-doudou-4745923a0) · [Portfolio](https://xdmanflow.github.io)
+
+## License
+
+Code under the [MIT License](LICENSE). Data remains under its original owners' terms.
