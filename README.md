@@ -10,9 +10,7 @@ Airline fleets produce enormous amounts of engine, flight and operational data. 
 
 ## ⭐ Flagship: the Fleet Maintenance Planner
 
-NASA C-MAPSS engines are assigned to real A320-family airframes tracked on the OpenSky Network. Each engine's degradation advances with its aircraft's **real flight cycles**. The planner combines predicted remaining useful life, anomaly scores and utilization into a **ranked, explained list of engines to inspect first**.
-
-> The fleet is **simulated** (C-MAPSS engines are synthetic) and labelled as such everywhere. The flight activity driving it is real.
+NASA C-MAPSS engines are assigned to real A320-family airframes tracked on the OpenSky Network. Each engine's degradation advances with its aircraft's **real flight cycles**. The planner combines predicted remaining useful life, anomaly scores and utilization into a **ranked, explained list of engines to inspect first**. The fleet is **simulated** (C-MAPSS engines are synthetic) and labelled as such everywhere. The flight activity driving it is real.
 
 ## Architecture
 
