@@ -4,11 +4,9 @@
 
 ---
 
-## Why AeroLisa
+## Why AeroLisa ?
 
-Airline fleets produce enormous amounts of engine, flight and operational data. Platforms such as Skywise turn that data into decisions: which engine to inspect first, which aircraft is flown hardest, where delays come from, how production shapes tomorrow's fleet.
-
-AeroLisa rebuilds that idea at small scale, with real engineering practices: ingestion pipelines, a shared data model, machine-learning modules, an API, a dashboard, an LLM copilot, tests, CI/CD, containers and cloud deployment.
+Airline fleets produce enormous amounts of engine, flight and operational data. Platforms such as Skywise turn that data into decisions: which engine to inspect first, which aircraft is flown hardest, where delays come from, how production shapes tomorrow's fleet. AeroLisa rebuilds that idea at small scale, with real engineering practices: ingestion pipelines, a shared data model, machine-learning modules, an API, a dashboard, an LLM copilot, tests, CI/CD, containers and cloud deployment.
 
 ## ⭐ Flagship: the Fleet Maintenance Planner
 
