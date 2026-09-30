@@ -164,9 +164,7 @@ AeroLisa is the applied side of **[Renaissance Project](https://github.com/xdman
 
 ## Author
 
-**Manil DOUDOU**, engineering student in computer science (AI & data science), CESI.
-[LinkedIn](https://www.linkedin.com/in/manil-doudou-4745923a0) · [Portfolio](https://xdmanflow.github.io)
-
+**Manil DOUDOU**, engineering student in computer science (AI & data science).
 ## License
 
 Code under the [MIT License](LICENSE). Data remains under its original owners' terms.
